@@ -1,0 +1,93 @@
+* { 
+    box-sizing: border-box; 
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+  background: #f8fafc;
+  color: #111827;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Inputs y Textarea */
+.print-page input[type="text"], 
+.print-page textarea {
+    font-family: "Inter", sans-serif;
+    color: #1e293b;
+    transition: background-color 0.2s;
+}
+
+.print-page input[type="text"]:focus, 
+.print-page textarea:focus {
+    outline: none;
+}
+
+.print-page input.font-mono {
+    font-family: "JetBrains Mono", monospace;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   IMPRESIÓN (Forzada a 1 Sola Página)
+   ═══════════════════════════════════════════════════════════ */
+@page { 
+    size: A4 portrait; 
+    margin: 0; 
+}
+
+@media print {
+  html, body { 
+    background: #fff !important; 
+    height: auto !important;
+    overflow: visible !important;
+  }
+  
+  .no-print, header { 
+    display: none !important; 
+  }
+  
+  main {
+    padding: 0 !important;
+    margin: 0 !important;
+    display: block !important;
+  }
+
+  /* Forzar la hoja A4 exacta y evitar que se estire */
+  .print-page {
+    box-shadow: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+    margin: 0 !important;
+    max-width: 210mm !important;
+    width: 210mm !important;
+    height: 297mm !important; /* Bloquea la altura */
+    padding: 10mm 12mm !important; 
+    page-break-after: avoid;
+    page-break-inside: avoid;
+    overflow: hidden !important; /* Corta lo que se salga */
+  }
+  
+  /* Ocultar textarea y mostrar el div de impresión */
+  #contenido-carta {
+    display: none !important;
+  }
+  
+  #contenido-carta-print {
+    display: block !important;
+    height: auto !important;
+    overflow: hidden !important;
+  }
+
+  .print-page .absolute.-left-6,
+  .print-page .absolute.-right-6 {
+      display: none !important;
+  }
+
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+}
